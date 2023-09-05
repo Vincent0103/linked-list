@@ -118,8 +118,25 @@ function linkedList() {
     }
   }
 
+  function removeAt(index) {
+    if (index === 0) this.nodeList = this.nodeList.nextNode;
+    else {
+      let tmp = this.nodeList;
+      let prevNode = tmp;
+      let count = 0;
+      while (count < index) {
+        prevNode = tmp;
+        tmp = tmp.nextNode;
+        count += 1;
+      }
+
+      prevNode.nextNode = tmp.nextNode;
+      tmp = null;
+    }
+  }
+
   return {nodeList: this.nodeList, append, prepend, size,
-    head, tail, at, pop, contains, find, toString, insertAt};
+    head, tail, at, pop, contains, find, toString, insertAt, removeAt};
 }
 
 function node(value=null, nextNode=null) {
@@ -132,4 +149,5 @@ myLinkedList.append('John');
 myLinkedList.prepend('Ariel');
 myLinkedList.append('Sarah');
 myLinkedList.insertAt('Mario', 3);
+myLinkedList.removeAt(1);
 console.log(myLinkedList.toString());
