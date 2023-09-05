@@ -148,6 +148,7 @@ myLinkedList.append('Hello!1!1!1');
 myLinkedList.append('John');
 myLinkedList.prepend('Ariel');
 myLinkedList.append('Sarah');
+myLinkedList.prepend('John');
 myLinkedList.insertAt('Mario', 3);
-myLinkedList.removeAt(1);
+myLinkedList.removeAt(2);
 console.log(myLinkedList.toString());
