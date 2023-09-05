@@ -4,7 +4,7 @@ function linkedList() {
   function append(value) {
     if (!this.nodeList.value) this.nodeList.value = value;
     else {
-      tmp = this.nodeList;
+      let tmp = this.nodeList;
       while (tmp.nextNode != null) tmp = tmp.nextNode;
       tmp.nextNode = node(value);
     }
@@ -47,7 +47,28 @@ function linkedList() {
     return tmp.value;
   }
 
-  return {nodeList: this.nodeList, append, prepend, size, head, tail, at};
+  function pop() {
+    let tmp = this.nodeList;
+    if (!tmp.nextNode) this.nodeList = node();
+    else {
+      while (tmp.nextNode.nextNode) {
+        tmp = tmp.nextNode;
+      }
+      tmp.nextNode = null;
+    }
+  }
+
+  function contains(value) {
+    let tmp = this.nodeList;
+    while (tmp.nextNode) {
+      if (tmp.value === value) return true;
+      tmp = tmp.nextNode;
+    }
+    if (tmp.value === value) return true;
+    return false;
+  }
+
+  return {nodeList: this.nodeList, append, prepend, size, head, tail, at, pop, contains};
 }
 
 function node(value=null, nextNode=null) {
@@ -59,5 +80,4 @@ myLinkedList.append('Hello!1!1!1');
 myLinkedList.append('John');
 myLinkedList.prepend('Ariel');
 myLinkedList.append('Sarah');
-console.log(myLinkedList.at(3));
-// myLinkedList.prepend('akr');
+console.log(myLinkedList.contains('Arie'));
