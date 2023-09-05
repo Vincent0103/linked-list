@@ -11,8 +11,12 @@ function linkedList() {
   }
 
   function prepend(value) {
-    const newNodeList = node(value, this.nodeList);
-    this.nodeList = newNodeList;
+    // console.log(this.nodeList);
+    if (!this.nodeList.value) this.nodeList = node(value);
+    else {
+      const newNodeList = node(value, this.nodeList);
+      this.nodeList = newNodeList;
+    }
   }
 
   function size() {
@@ -68,7 +72,39 @@ function linkedList() {
     return false;
   }
 
-  return {nodeList: this.nodeList, append, prepend, size, head, tail, at, pop, contains};
+  function find(value) {
+    let tmp = this.nodeList;
+    let count = 0;
+    while (tmp.nextNode) {
+      if (tmp.value === value) return count;
+      tmp = tmp.nextNode;
+      count += 1;
+    }
+    if (tmp.value === value) return count;
+    return null;
+  }
+
+  function toString() {
+    let str = '';
+    let tmp = this.nodeList;
+
+    if (!tmp.value) return str = 'null';
+    else str = `( ${tmp.value} )`;
+
+    while (tmp.nextNode) {
+      tmp = tmp.nextNode;
+      str += ` -> ( ${tmp.value} )`;
+    }
+
+    if (!tmp.nextNode) {
+      str += ' -> null';
+    }
+
+    return str;
+  }
+
+  return {nodeList: this.nodeList, append, prepend, size,
+    head, tail, at, pop, contains, find, toString};
 }
 
 function node(value=null, nextNode=null) {
@@ -80,4 +116,4 @@ myLinkedList.append('Hello!1!1!1');
 myLinkedList.append('John');
 myLinkedList.prepend('Ariel');
 myLinkedList.append('Sarah');
-console.log(myLinkedList.contains('Arie'));
+console.log(myLinkedList.toString());
