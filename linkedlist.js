@@ -11,7 +11,6 @@ function linkedList() {
   }
 
   function prepend(value) {
-    // console.log(this.nodeList);
     if (!this.nodeList.value) this.nodeList = node(value);
     else {
       const newNodeList = node(value, this.nodeList);
@@ -103,8 +102,24 @@ function linkedList() {
     return str;
   }
 
+  function insertAt(value, index) {
+    if (index === 0) this.prepend(value);
+    else {
+      let tmp = this.nodeList;
+      let prevNode = tmp;
+      let count = 0;
+      while (count < index) {
+        count += 1;
+        prevNode = tmp;
+        tmp = tmp.nextNode;
+      }
+      let newNode = node(value, tmp);
+      prevNode.nextNode = newNode;
+    }
+  }
+
   return {nodeList: this.nodeList, append, prepend, size,
-    head, tail, at, pop, contains, find, toString};
+    head, tail, at, pop, contains, find, toString, insertAt};
 }
 
 function node(value=null, nextNode=null) {
@@ -116,4 +131,5 @@ myLinkedList.append('Hello!1!1!1');
 myLinkedList.append('John');
 myLinkedList.prepend('Ariel');
 myLinkedList.append('Sarah');
+myLinkedList.insertAt('Mario', 3);
 console.log(myLinkedList.toString());
